@@ -32,5 +32,7 @@ virt-sysprep -a $buildfile
 qemu-img convert -c -O qcow2 $buildfile /var/www/html/centos6-base.qcow2
 rm -f $buildfile
 
+sleep 10
+virt-edit -a /var/www/html/centos6-base.qcow2 /boot/grub/grub.conf -e's/(^\t*kernel \/.*)/$1 edd=off/'
 echo ""
 echo "Done. CentOS6 image was created at /var/www/html/centos6-base.qcow2"
